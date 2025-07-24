@@ -1,28 +1,28 @@
 --Calculate Column (คอลัมน์ที่มีการคำนวณ)
---1.มูลค่าสินค้าคงเหลือต่อรางการ
+--มูลค่าสินค้าคงเหลือต่อรางการ
 SELECT ProductID, productName,  
          UnitPrice, UnitsInStock,   
          UnitPrice * UnitsInStock AS StockUalue
 FROM Products
 
---2.ต้องสั่งสินค้าเพิ่มหรือยัง
+--ต้องสั่งสินค้าเพิ่มหรือยัง
 SELECT productID as รหัส, productName as สินค้า,
        UnitsInStock + UnitsOnOrder as จำนวนคงเหลือทั้งหมด,
        ReorderLevel as จุดสั่งซื้อ
 FROM Products
 WHERE (UnitsInStock  + UnitsOnOrder) < ReorderLevel
 
---3.ภาษีมูลค่าเพิ่ม 7 %
+--ภาษีมูลค่าเพิ่ม 7 %
 SELECT productID,productName,
        Unitprice,ROUND(UnitPrice * 0.07,2) AS Uat7
 FROM Products
 
---4.ชื่อนามสกุลพนักงาน
+--ชื่อนามสกุลพนักงาน
 SELECT employeeID,
   TitleOFCourtesy+FirstName+'' +LastName as[Employee Name]
 FROM Employees
 
---5.ต้องการทราบราคาใรแต่ละรายการขายสินค้า [order details]
+--ต้องการทราบราคาใรแต่ละรายการขายสินค้า [order details]
 SELECT  orderID, productID,UnitPrice, Quantity, Discount,
          (UnitPrice* Quantity) as TotalPrice,
          (UnitPrice* Quantity)-(UnitPrice* Quantity* Discount) as Netprice
@@ -40,7 +40,7 @@ FROM [order details]
 --ราคาจริง = ราคา * จำนวน * (1-ลด)
 SELECT (42.40 * 35)-(42.40 * 35 * 0.15)
 
---6.ต้องการทราบอายุ และอายุของพนักงานทุกคน จนถึงปัจจุบัน
+--ต้องการทราบอายุ และอายุของพนักงานทุกคน จนถึงปัจจุบัน
 SELECT employeeID,FirstName, BirthDate, Datediff(YEAR,BirthDate,getdate())Age,
        HireDate, DATEDIFF(YEAR,HireDate,GETDATE()) YearINoffice
 FROM Employees
