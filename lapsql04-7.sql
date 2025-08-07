@@ -30,5 +30,3 @@ SELECT Username, Password FROM Employees WHERE FirstName = 'ก้อง';
 SELECT EmployeeID from Receipts WHERE ReceiptID =3
 -- 15. รหัสสินค้า ชื่อสินค้า ราคา ของสินค้าที่มีรหัสประเภท 2, 4
 SELECT ProductID, ProductName, UnitPrice FROM Products WHERE CategoryID IN (2, 4);
-
-
