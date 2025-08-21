@@ -5,7 +5,7 @@ Where CategoryName = 'seafood'
 
 Select CategoryName, ProductName,UnitPrice
 From Products as P Join Categories as C
-On P.CategoryID= c.CagetgoryID
+On P.CategoryID= c.CategoryID
 
 --จงแสดงข้อมูลหมายเลขใบสั่งซื้อและชื่อบริษัทขนส่งสินค้า
 SELECT companyName, OrderId
@@ -51,5 +51,21 @@ ORDER BY 2 DESC
 
 --ต้องการรหัสสินค้า ชื่อสินค้า และจำนวนทั้งหมดที่ขายได้
 SELECT p.ProductID, p.ProductName, sum(Quantity) จำนสนที่ขายได้
- from Products p JOIN [Order Details] od on p.ProductID = od.ProductID
+from Products p JOIN [Order Details] od on p.ProductID = od.ProductID
 GROUP BY p.ProductID, p.ProductName
+
+--ต้องการรหัสสินค้า ชื่อสินค้า ที่ nancy ขายได้ ทั้งหมด เรียงตามลำดับรหัสสินค้า
+SELECT Distinct p.ProductID, p.ProductName
+from Employees e JOIN Orders o on e.EmployeeID = o.EmployeeID
+                 JOIN [Order Details] od on o.OrderID = od.OrderID
+                 JOIN Products p on p.ProductID = od.ProductID
+WHERE e.FirstName = 'Nancy'
+ORDER BY ProductID
+
+--ต้องการชื่อบริษัทลูกค้าชื่อ Around the horn ซื้อสินค้าที่มาจากประเทศอะไรบ้าง
+SELECT distinct s.Country
+from Customers c join orders o on c.CustomerID = o.CustomerID
+                 JOIN [Order Details] od on o.OrderID = od.OrderID
+                 JOIN Products p on p.ProductID = od.ProductID
+                 JOIN Suppliers s on s.SupplierID = p.SupplierID
+WHERE c.CompanyName = 'Around the Horn'
