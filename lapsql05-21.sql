@@ -5,7 +5,7 @@ Where CategoryName = 'seafood'
 
 Select CategoryName, ProductName,UnitPrice
 From Products as P Join Categories as C
-On P.CategoryID=C.CagetgoryID
+On P.CategoryID= c.CagetgoryID
 
 --จงแสดงข้อมูลหมายเลขใบสั่งซื้อและชื่อบริษัทขนส่งสินค้า
 SELECT companyName, OrderId
@@ -28,3 +28,12 @@ ON Shippers.ShipperID=Orders.Shipvia
 WHERE OrderID=10275
 
 --ต้องการรหัสสินค้า ชื่อสินค้า บริษัทผู้จำหน่าย ประเทศ
+SELECT p.ProductID, p.ProductName, s.CompanyName, s.Country
+From products p join Suppliers s on p.SupplierID = s.SupplierID
+where Country in ('usa','uk')
+--ต้องการรหัสพนักงาน ชื่อพนักงาน รหัสใบสั่งชื่อที่เกี่ยวข้อง เรียงตามลำดับของพนักงาน
+SELECT e.EmployeeID,FirstName, o.OrderID
+from Employees e JOIN Orders o on e.EmployeeID = o.EmployeeID
+ORDER BY EmployeeID
+--ต้องการรหัสสิน ชื่อสินค้า เมือง และประเทศของบริษัทผู้จำหน่าย
+
