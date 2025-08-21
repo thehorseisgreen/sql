@@ -37,3 +37,8 @@ from Employees e JOIN Orders o on e.EmployeeID = o.EmployeeID
 ORDER BY EmployeeID
 --ต้องการรหัสสิน ชื่อสินค้า เมือง และประเทศของบริษัทผู้จำหน่าย
 
+--จงแสดงหมายเลขใบสั่งซื้อ, ชื่อบริษัทลูกค้า,สถานที่ส่งของ, และพนักงานผู้ดูแล
+SELECT O.OrderID เลขใบสั่งซื้อ, C.CompanyName ลูกค้า, E.FirstName พนักงาน, O.ShipAddress ส่งไปที่
+FROM Orders O 
+join Customers C on O.CustomerID=C.CustomerID
+join Employees E on O.EmployeeID=E.EmployeeID
