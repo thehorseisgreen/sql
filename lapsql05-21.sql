@@ -62,10 +62,20 @@ from Employees e JOIN Orders o on e.EmployeeID = o.EmployeeID
 WHERE e.FirstName = 'Nancy'
 ORDER BY ProductID
 
---ต้องการชื่อบริษัทลูกค้าชื่อ Around the horn ซื้อสินค้าที่มาจากประเทศอะไรบ้าง
+--ต้องการชื่อบริษัทลูกค้าชื่อ Around the Horn ซื้อสินค้าที่มาจากประเทศอะไรบ้าง
 SELECT distinct s.Country
 from Customers c join orders o on c.CustomerID = o.CustomerID
                  JOIN [Order Details] od on o.OrderID = od.OrderID
                  JOIN Products p on p.ProductID = od.ProductID
                  JOIN Suppliers s on s.SupplierID = p.SupplierID
 WHERE c.CompanyName = 'Around the Horn'
+
+--บริษัทลูกค้าชื่อ Around the Horn ซื้อสินค้าอะไรบ้าง จำนวนเท่าใด 
+SELECT p.ProductID,p.ProductName,sum (Quantity) จำนวนที่ซื้อ
+from Customers c join orders o on c.CustomerID = o.CustomerID
+                 JOIN [Order Details] od on o.OrderID = od.OrderID
+                 JOIN Products p on p.ProductID = od.ProductID
+WHERE c.CompanyName = 'Around the Horn'
+GROUP by p.ProductID,p.ProductName
+
+--ต้องการหมายเลขใบสั่งซื้อ ชื่อพนักงาน และยอดขายในใบสั่งซื้อนั้น
